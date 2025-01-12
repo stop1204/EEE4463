@@ -11,7 +11,7 @@ This repository is dedicated to storing code and related materials for the EEE44
 ## How to Use
 1. **Clone the repository** to your local machine using the command:
 ```bash
-git clone [repository_url]
+git clone https://github.com/stop1204/EEE4463.git
 ```
 2. Navigate to the relevant directories to access the code, data, or documentation you need.
 3. Follow the instructions provided in the documentation to run the code and perform the required tasks.
@@ -20,12 +20,12 @@ git clone [repository_url]
 - Fork the repository to your own GitHub account.
 - Create a new branch for your changes:
 ```bash
-git checkout -b [branch_name]
+git checkout -b main
 ```
 - Make your changes and commit them with descriptive commit messages.
 - Push your changes to your forked repository:
 ```bash
-git push origin [branch_name]
+git push origin main
 ```
 - Open a pull request in the original repository, describing the changes you have made.
 
@@ -34,6 +34,4 @@ git push origin [branch_name]
 - **Additional Code Implementations**: [Space to mention any upcoming or planned code implementations related to advanced topics or improvements.]
 
 ## License
-[To be determined based on the course's requirements and any applicable institutional policies.]
-
-Please note that this README is a starting point and will be updated as the repository evolves. 
+[MIT License](LICENSE)
