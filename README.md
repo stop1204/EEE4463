@@ -1,3 +1,12 @@
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2F%2Fantext-3.12.4-blue?style=plastic&logo=Python&logoColor=%233776AB&label=Python&labelColor=white&link=https%3A%2F%2Fwww.python.org%2Fdownloads%2F)
+![Static Badge](https://img.shields.io/badge/Jupyter-white?style=plastic&logo=Jupyter&logoColor=%23F37626)
+
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-1.26.4-red?style=plastic&logo=Numpy&logoColor=%23013243&label=Numpy)
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-2.2.2-red?style=plastic&logo=Pandas&logoColor=%23150458&label=Pandas)
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-3.10.0-red?style=plastic&logo=&logoColor=%23150458&label=Matplotlib)
+
+#
+
 # EEE4463 Course Code Repository
 
 This repository is dedicated to storing code and related materials for the EEE4463 course. It aims to provide a centralized location for all the programming tasks, projects, and examples related to the course content.
