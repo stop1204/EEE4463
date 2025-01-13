@@ -14,7 +14,9 @@ This repository is dedicated to storing code and related materials for the EEE44
 ## Repository Contents
 - **Source Code**: This directory will contain the main source code files for various algorithms and applications covered in the course. For example, there will be code related to machine learning models such as linear regression, logistic regression, neural networks, etc. Each model's code may be organized in a separate subdirectory for better management.
 - **Data**: A folder to store any datasets used in the code. These datasets could be for training and testing the machine learning models or for data analysis tasks. The data may be in different formats such as CSV, JSON, or other relevant formats.
+- 
 ~~- **Documentation**: Here, you will find documentation related to the code, including function descriptions, usage instructions, and any relevant technical notes. This will help in understanding the purpose and functionality of the code.~~
+
 ~~- **Examples**: Sample code snippets and small projects that demonstrate the usage of the algorithms and techniques taught in the course. These examples can serve as a reference for students when working on their own assignments.~~
 
 ## How to Use
