@@ -12,12 +12,8 @@
 This repository is dedicated to storing code and related materials for the EEE4463 course. It aims to provide a centralized location for all the programming tasks, projects, and examples related to the course content.
 
 ## Repository Contents
-- **Source Code**: This directory will contain the main source code files for various algorithms and applications covered in the course. For example, there will be code related to machine learning models such as linear regression, logistic regression, neural networks, etc. Each model's code may be organized in a separate subdirectory for better management.
-- **Data**: A folder to store any datasets used in the code. These datasets could be for training and testing the machine learning models or for data analysis tasks. The data may be in different formats such as CSV, JSON, or other relevant formats.
-- 
-~~- **Documentation**: Here, you will find documentation related to the code, including function descriptions, usage instructions, and any relevant technical notes. This will help in understanding the purpose and functionality of the code.~~
-
-~~- **Examples**: Sample code snippets and small projects that demonstrate the usage of the algorithms and techniques taught in the course. These examples can serve as a reference for students when working on their own assignments.~~
+- **Location**: The main source code files for various algorithms and applications covered in the course are stored in the `Labs` directory.
+- **Organization**: Each lab has its own subdirectory within `Labs`, which helps in organizing the codebase efficiently. Within these subdirectories, you will find Python scripts along with their corresponding Jupyter notebooks for each algorithm or application. For instance, there will be code related to machine learning models such as linear regression, logistic regression, neural networks, and more. Each model's code and its associated Jupyter notebook will be organized in separate subdirectories under the respective lab's directory. This dual-code format (Python and Jupyter) allows for both traditional script execution and interactive data exploration and experimentation.
 
 ## How to Use
 1. **Clone the repository** to your local machine using the command:
@@ -40,9 +36,6 @@ git push origin main
 ```
 - Open a pull request in the original repository, describing the changes you have made.
 
-## Future Additions
-- **Project Reports**: [Placeholder for where project reports will be added once available.]
-- **Additional Code Implementations**: [Space to mention any upcoming or planned code implementations related to advanced topics or improvements.]
 
 ## License
 [MIT License](LICENSE)
