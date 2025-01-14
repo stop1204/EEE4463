@@ -1,7 +1,7 @@
 import sys
 import unittest
 from io import StringIO
-from P1 import  print_star
+from HE_HUA_LIANG_P1 import  print_star
 
 class TestPrintStar(unittest.TestCase):
     def setUp(self):

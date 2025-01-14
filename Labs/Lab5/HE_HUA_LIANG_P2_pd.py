@@ -40,7 +40,8 @@ def main():
     3   2  1 -8 -0.333  0.471
     """
 
-    print(df.map(lambda x: f"{int(x)}".ljust(10) if x == int(x) else f"{x:.3f}".ljust(10)).to_string(index=False))
+    df = df.map(lambda x: f"{int(x)}".ljust(10) if x == int(x) else f"{x:.3f}".ljust(10))
+    print(df.to_string(index=False))
     """
     a          b          c          D          p          q         
     1          5          3          13         -4.303     -0.697    
