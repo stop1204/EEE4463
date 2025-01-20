@@ -23,6 +23,10 @@ git clone https://github.com/stop1204/EEE4463.git
 2. Navigate to the relevant directories to access the code, data, or documentation you need.
 3. Follow the instructions provided in the documentation to run the code and perform the required tasks.
 
+## Troubleshooting
+1. When you run the code, if File Load Error for `xxx.ipynb` Unreadable Notebook: `/Users/xxx/Labs/xxx.ipynb` NBFormatError [('Unsupported nbformat version 5')](). Please open the `xxx.ipynb` file with a `text editor`, change [("nbformat": 5 to "nbformat": 4)](), or lower (the version supported by your environment), then save the file, rerun the code
+
+If you encounter any issues while running the code or have any questions, please open an issue in the repository.
 ## Contribution Guidelines
 - Fork the repository to your own GitHub account.
 - Create a new branch for your changes:
