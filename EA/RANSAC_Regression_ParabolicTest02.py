@@ -20,11 +20,11 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-
 import csv
 
 import numpy as np
 from matplotlib import pyplot as plt
+from sklearn.linear_model import RANSACRegressor
 
 
 def ReadCSV(filename):
@@ -58,7 +58,7 @@ def ReadCSV(filename):
 # Data Preparation
 """
 Read data from CSV file, convert to numpy arrays, and reshape for further processing.
-This section prepares the input data for the linear regression model.
+This section prepares the input data for the RANSAC regression model.
 """
 _x, _y = ReadCSV('ParabolaWithNoiseOutlier.csv')
 number_of_samples = len(_x)
@@ -66,19 +66,6 @@ x_pos = np.array(_x)
 x_pos = x_pos.reshape(number_of_samples, 1)
 y_pos = np.array(_y)
 y_pos = y_pos.reshape(number_of_samples, 1)
-
-# *****************************
-# Data Visualization - Scatter Plot
-"""
-Create a scatter plot of the input data.
-This helps visualize the distribution of the data points, including noise and outliers.
-"""
-plt.scatter(
-    x_pos, y_pos, color="gold", marker=".", label="Training data with noise and outliers"
-)
-
-plt.xlabel('x', fontsize=15)
-plt.ylabel('y', fontsize=15)
 
 # *************************** 
 # Feature Engineering
@@ -94,46 +81,58 @@ K = np.concatenate((t1, t2), axis=1)
 # ************************
 # Model Training
 """
-Train a linear regression model using the prepared features.
+Train a RANSAC regression model using the prepared features.
 The model will fit a quadratic function to the data.
 """
-from sklearn.linear_model import LinearRegression
 
-reg = LinearRegression().fit(K, y_pos)
+ransac = RANSACRegressor(random_state=0).fit(K, y_pos)
+print(
+    f'RANSAC regression model (with noise and outliers): Coefficients = {ransac.estimator_.coef_}  intercept = {ransac.estimator_.intercept_}')
+print(f'y = {ransac.estimator_.coef_[0]} * x  +  {ransac.estimator_.intercept_}')
 
-print(f'Linear regression model: Coefficients = {reg.coef_}  intercept = {reg.intercept_}')
-print(f' y = {reg.coef_[0][0]} * x**2 + {reg.coef_[0][1]} * x + {reg.intercept_}')
-
-# ****************************
-# Draw the fitted curve
-# Model Visualization
-"""
-Visualize the fitted quadratic curve along with the original data points.
-This helps to assess how well the model fits the data.
-"""
+inlier_mask = ransac.inlier_mask_
+outlier_mask = np.logical_not(inlier_mask)
+# *************************
+# Draw the fitted line using RANSAC
 min_x = min(x_pos)
 max_x = max(x_pos)
 
 numOfPoint = 300
 temp_x = np.linspace(min_x, max_x, num=numOfPoint)
-xpoints = temp_x.reshape(numOfPoint, 1)
-xxpoints = xpoints ** 2
-H = np.concatenate((xxpoints, xpoints), axis=1)
-prediction = reg.predict(H)
+t1_pred = temp_x ** 2
+t1_pred = t1_pred.reshape(numOfPoint, 1)
+t2_pred = temp_x.reshape(numOfPoint, 1)
+xpoints = np.concatenate((t1_pred, t2_pred), axis=1)
+ypoints = ransac.predict(xpoints)
+# Data Visualization - Scatter Plot
+"""
+Create a scatter plot of the input data.
+This helps visualize the distribution of the data points, including noise and outliers.
+"""
+plt.figure("Figure 1")
 
-plt.plot(xpoints, prediction, color="blue", linewidth=1, label="LR model")
-
+plt.plot(temp_x, ypoints, color="blue", linewidth=2, label="RANSAC regression model")
+plt.scatter(
+    x_pos[inlier_mask], y_pos[inlier_mask], color="orange", marker=".", label="Training data with noise"
+)
+plt.scatter(
+    x_pos[outlier_mask], y_pos[outlier_mask], color="red", marker=".", label="Training data with outliers"
+)
+plt.xlabel('X (Distance unit: m)', fontsize=15)
+plt.ylabel('Y (Height unit: m)', fontsize=15)
+plt.title('RANSAC regression - data with noise and outliers')
 plt.legend(loc='lower left', fontsize=12)
-plt.title('Linear Regression - data with noise and outliers')
 plt.show()
+
 # ******************************
 # Residual Analysis
 """
 Analyze the residuals of the model to assess its performance.
 Plot a histogram of residuals to visualize their distribution.
 """
-prediction = reg.predict(K)
+prediction = ransac.predict(K)
 residual = prediction - y_pos
+plt.figure("Figure 2")
 plt.hist(residual, bins=30)
 plt.xlabel('Residual', fontsize=15)
 plt.ylabel('Count', fontsize=15)
@@ -147,6 +146,6 @@ Use the trained model to make a prediction for a specific x value.
 This demonstrates how to use the model for new data points.
 """
 x_test = np.array([[40.0 ** 2, 40.0], ])
-y_result = reg.predict(x_test)
+y_result = ransac.predict(x_test)
 
 print(f'When x = {x_test[0]}, y = {y_result[0]}')

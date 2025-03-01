@@ -2,16 +2,16 @@
 %
 %  Instructions
 %  ------------
-% 
+%
 %  This file contains code that helps you get started on the logistic
-%  regression exercise. You will need to complete the following functions 
+%  regression exercise. You will need to complete the following functions
 %  in this exericse:
 %
 %     sigmoid.m
 %     costFunction.m
 %     plotData.m
 %     predict.m
-%     
+%
 %
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
@@ -28,16 +28,16 @@ data = load('ex2data1.txt'); % load csv file
 X = data(:, [1, 2]); y = data(:, 3); % X=col 1,2  y=col 3 of csv data
 
 %% ==================== Part 1: Plotting ====================
-%  We start the exercise by first plotting the data to understand the 
+%  We start the exercise by first plotting the data to understand the
 %  the problem we are working with.
 
 % use [ 'quoted string' ... 'string continue' ] for multiple-line string
 fprintf(['1. Plotting data with + indicating (y = 1) examples and o ' ...
-         'indicating (y = 0) examples.\n']); 
+         'indicating (y = 0) examples.\n']);
 % plot data with plotData.m                           <--------- write your code
 plotData(X, y);
 
-% Put some labels 
+% Put some labels
 hold on;
 % Labels and Legend
 xlabel('Exam 1 score')
@@ -46,14 +46,14 @@ ylabel('Exam 2 score')
 % Specified in plot order
 legend('Admitted', 'Not admitted')
 hold off;
-
+print -dpng plotData.png
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ============ Part 2: Compute Cost and Gradient ============
 %  In this part of the exercise, you will implement the cost and gradient
-%  for logistic regression. You neeed to complete the code in 
+%  for logistic regression. You neeed to complete the code in
 %  costFunction.m
 fprintf('\n2. Compute Cost and Gradient\n');
 
@@ -69,9 +69,9 @@ xlabel('z');
 ylabel('g(z)');
 legend('sigmoid(z)');
 hold off;
-
+print -dpng sigmoid.png
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %  Setup the data matrix appropriately, and add ones for the intercept term
 [m, n] = size(X);
@@ -85,7 +85,7 @@ initial_theta = zeros(n + 1, 1);
 % Compute and display cost and gradient: costFunction.m  <------ write your code
 [cost, grad] = costFunction(initial_theta, X, y);
 
-fprintf('\n2b. Cost at initial theta (zeros): %f\n', cost);
+%fprintf('\n2b. Cost at initial theta (zeros): %f\n', cost);
 fprintf('Expected cost (approx): 0.693\n');
 fprintf('Gradient at initial theta (zeros): \n');
 fprintf(' %f \n', grad);
@@ -113,7 +113,7 @@ fprintf('\n3. Optimizing using fminunc\n');
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 %  Run fminunc to obtain the optimal theta
-%  This function will return theta and the cost 
+%  This function will return theta and the cost
 [theta, cost] = ...
 	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
   % advance: passing function "costFunction" to fminunc as 1 of the parameters
@@ -130,7 +130,7 @@ fprintf('\n3.1 Plot Decision Boundary\n');
 % Plot Decision Boundary
 plotDecisionBoundary2(theta, X, y); %use plotDecisionBoundarys for size(X,2) > 3
 
-% Put some labels 
+% Put some labels
 hold on;
 % Labels and Legend
 xlabel('Exam 1 score')
@@ -139,23 +139,23 @@ ylabel('Exam 2 score')
 % Specified in plot order
 legend('Admitted', 'Not admitted')
 hold off;
-
+print -dpng costFunction.png
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% ============== Part 4: Predict and Accuracies ==============
 %  After learning the parameters, you'll like to use it to predict the outcomes
 %  on unseen data. In this part, you will use the logistic regression model
-%  to predict the probability that a student with score 45 on exam 1 and 
+%  to predict the probability that a student with score 45 on exam 1 and
 %  score 85 on exam 2 will be admitted.
 %
-%  Furthermore, you will compute the training and test set accuracies of 
+%  Furthermore, you will compute the training and test set accuracies of
 %  our model.
 %
 %  Your task is to complete the code in predict.m
 
-%  Predict probability for a student with score 45 on exam 1 
-%  and score 85 on exam 2 
+%  Predict probability for a student with score 45 on exam 1
+%  and score 85 on exam 2
 fprintf('\n4. Prediction and Accuracies\n');
 
 % use of sigmoid to find the probability
@@ -167,7 +167,7 @@ fprintf('Expected value: 0.775 +/- 0.002\n\n');
 % Compute accuracy on our training set: predict.m     <--------- write your code
 p = predict(theta, X);
 
-fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100); 
+fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
 %try this 1 step at a time: sum(double(p == y)/length(y) * 100
 fprintf('Expected accuracy (approx): 89.0\n');
 fprintf('\n');
@@ -176,7 +176,7 @@ fprintf('\n');
 
 %% ============ Part 5: Plot plot_y in plotDecisionBoundary2============
 %  In this part of the exercise, you will implement the cost and gradient
-%  for logistic regression. You neeed to complete the code in 
+%  for logistic regression. You neeed to complete the code in
 %  costFunction.m
 fprintf('\n5: Plot plot_y in plotDecisionBoundary2\n');
 plot_x = [min(X(:,2))-2,  max(X(:,2))+2];
@@ -189,4 +189,4 @@ plot(X(:,2), g_plot);
 xlabel('X2');
 ylabel('sigmoid(z)');
 hold off;
-
+print -dpng plotDecisionBoundary2.png
