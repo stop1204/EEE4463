@@ -150,4 +150,13 @@ y_result = ransac.predict(x_test)
 
 print(f'When x = {x_test[0]}, y = {y_result[0]}')
 
-# TODO: k[inlier_mask] show the residual without outliers
+# ****************************
+# k[inlier_mask] show the residual without outliers
+prediction = ransac.predict(K[inlier_mask])
+residual = prediction - y_pos[inlier_mask]
+plt.figure("Figure 4")
+plt.hist(residual, bins=30)
+plt.xlabel('Residual', fontsize=15)
+plt.ylabel('Count', fontsize=15)
+plt.title('Residual histogram (data without noise and outliers)')
+plt.show()
