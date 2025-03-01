@@ -88,7 +88,7 @@ The model will fit a quadratic function to the data.
 ransac = RANSACRegressor(random_state=0).fit(K, y_pos)
 print(
     f'RANSAC regression model (with noise and outliers): Coefficients = {ransac.estimator_.coef_}  intercept = {ransac.estimator_.intercept_}')
-print(f'y = {ransac.estimator_.coef_[0]} * x  +  {ransac.estimator_.intercept_}')
+print(f'y = {ransac.estimator_.coef_[0][0]} * x^2 + {ransac.estimator_.coef_[0][1]} * x + {ransac.estimator_.intercept_[0]}')
 
 inlier_mask = ransac.inlier_mask_
 outlier_mask = np.logical_not(inlier_mask)
@@ -149,3 +149,5 @@ x_test = np.array([[40.0 ** 2, 40.0], ])
 y_result = ransac.predict(x_test)
 
 print(f'When x = {x_test[0]}, y = {y_result[0]}')
+
+# TODO: k[inlier_mask] show the residual without outliers
