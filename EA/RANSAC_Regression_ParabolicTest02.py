@@ -84,8 +84,8 @@ K = np.concatenate((t1, t2), axis=1)
 Train a RANSAC regression model using the prepared features.
 The model will fit a quadratic function to the data.
 """
-
-ransac = RANSACRegressor(random_state=0).fit(K, y_pos)
+residual_threshold = None
+ransac = RANSACRegressor(random_state=0, residual_threshold=residual_threshold).fit(K, y_pos)
 print(
     f'RANSAC regression model (with noise and outliers): Coefficients = {ransac.estimator_.coef_}  intercept = {ransac.estimator_.intercept_}')
 print(f'y = {ransac.estimator_.coef_[0][0]} * x^2 + {ransac.estimator_.coef_[0][1]} * x + {ransac.estimator_.intercept_[0]}')
@@ -116,11 +116,11 @@ plt.scatter(
     x_pos[inlier_mask], y_pos[inlier_mask], color="orange", marker=".", label="Training data with noise"
 )
 plt.scatter(
-    x_pos[outlier_mask], y_pos[outlier_mask], color="red", marker=".", label="Training data with outliers"
+    x_pos[outlier_mask], y_pos[outlier_mask], color="red", s=50, marker="x", label="Training data with outliers"
 )
 plt.xlabel('X (Distance unit: m)', fontsize=15)
 plt.ylabel('Y (Height unit: m)', fontsize=15)
-plt.title('RANSAC regression - data with noise and outliers')
+plt.title(f'RANSAC regression - data with noise and outliers\nresidual_threshold={residual_threshold}')
 plt.legend(loc='lower left', fontsize=12)
 plt.show()
 
@@ -136,7 +136,7 @@ plt.figure("Figure 2")
 plt.hist(residual, bins=30)
 plt.xlabel('Residual', fontsize=15)
 plt.ylabel('Count', fontsize=15)
-plt.title('Residual histogram (data with noise and outliers)')
+plt.title(f'Residual histogram (data with noise and outliers)\nresidual_threshold={residual_threshold}')
 plt.show()
 
 # ****************************
@@ -158,5 +158,5 @@ plt.figure("Figure 4")
 plt.hist(residual, bins=30)
 plt.xlabel('Residual', fontsize=15)
 plt.ylabel('Count', fontsize=15)
-plt.title('Residual histogram (data without noise and outliers)')
+plt.title(f'Residual histogram (data with noise)\nresidual_threshold={residual_threshold}')
 plt.show()
