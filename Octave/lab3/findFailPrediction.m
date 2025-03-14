@@ -13,7 +13,7 @@ function fp = findFailPrediction(pred, y)
 %       
 %       
 
-
+fp = find(pred ~= y); % find the index of fail predictions
 
 
 

@@ -17,21 +17,9 @@ W = zeros(L_out, 1 + L_in);
 
 
 % ====================== YOUR CODE HERE ======================
-% Instructions: Initialize W randomly so that we break the symmetry while
-%               training the neural network.
-%
-% Note: The first column of W corresponds to the parameters for the bias unit
-%
-% Check hints in worksheet
-
-
-
-
-
-
-
-
-
+% Initialize W randomly with values in range [-epsilon, epsilon]
+epsilon_init = sqrt(6) / sqrt(L_in + L_out);
+W = rand(L_out, 1 + L_in) * 2 * epsilon_init - epsilon_init;
 % =========================================================================
 
 end

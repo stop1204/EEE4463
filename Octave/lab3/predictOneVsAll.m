@@ -30,7 +30,7 @@ X = [ones(m, 1) X]; %5000x(n+1) = 5000x401
 %       for each row.
 %       
 
-
+[p, ii] = max(all_theta * X', [], 1);
 
 
 

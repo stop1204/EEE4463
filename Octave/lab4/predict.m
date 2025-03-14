@@ -11,12 +11,19 @@ num_labels = size(Theta2, 1);
 p = zeros(size(X, 1), 1);
 
 % ====================== YOUR CODE HERE ======================
-%
-% Check hints in worksheet
+% Add bias unit to X
+X = [ones(m, 1) X];
 
+% Calculate hidden layer activations
+z2 = X * Theta1';
+a2 = [ones(m, 1) sigmoid(z2)];
 
+% Calculate output layer activations
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
-
+% Get the index of the max value for each example
+[_, p] = max(a3, [], 2);
 % =============================================================
 
 

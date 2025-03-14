@@ -35,6 +35,11 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
+h=sigmoid(X * theta); % hypothesis
+temp=theta; % copy theta
+temp(1)=0; % set first element to 0
+J = (1/m)*(-y'*log(h) - (1-y)'*log(1-h)) + (lambda/(2*m))*sum(temp.^2); % cost function
+grad = grad+(1/m)*(X'*(h-y)) ; % gradient
 
 %use new implementation here, test with solution of ex2 - worked!
 

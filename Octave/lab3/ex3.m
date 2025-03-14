@@ -20,7 +20,7 @@
 clear ; close all; clc
 
 %% Your name and group
-groupMember=["Chan"; "Lee"; "Cheung"; "Wong"];
+groupMember=["HUALIANG"; "HE"; "Cheung"; "Wong"];
 groupNo=9;
 fprintf('\nGroup %d: %s, %s, %s, %s\n', groupNo, 
   groupMember(1,:), groupMember(2,:), groupMember(3,:), groupMember(4,:));

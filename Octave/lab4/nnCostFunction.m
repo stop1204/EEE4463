@@ -63,19 +63,42 @@ Theta2_grad = zeros(size(Theta2));
 
 
 %% Part 4 code
-%find cost function without regularization
+% Feedforward propagation
+a1 = [ones(m, 1) X]; % Add bias unit
+z2 = a1 * Theta1';
+a2 = [ones(m, 1) sigmoid(z2)]; % Add bias unit
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
+% Convert y to binary matrix
+y_matrix = eye(num_labels)(y,:);
+
+% Calculate unregularized cost
+J = (1/m) * sum(sum(-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3)));
 
 %% Part 5 code
-%find cost function with regularization
+% Regularization term
+reg_term = (lambda/(2*m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
+% Add regularization to cost
+J = J + reg_term;
 
 %% Part 6 code
-%partial dervative with vectorization
+% Backpropagation
+d3 = a3 - y_matrix;
+d2 = (d3 * Theta2(:, 2:end)) .* sigmoidGradient(z2);
 
+% Accumulate gradients
+Delta1 = d2' * a1;
+Delta2 = d3' * a2;
+
+Theta1_grad = (1/m) * Delta1;
+Theta2_grad = (1/m) * Delta2;
 
 %% Part 7
-%regularized gradient
+% Regularization of gradients
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + (lambda/m) * Theta1(:, 2:end);
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + (lambda/m) * Theta2(:, 2:end);
 
 
 
