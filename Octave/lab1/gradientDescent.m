@@ -28,7 +28,7 @@ for iter = 1:num_iters
 
     % Save the cost J in every iteration
     J_history(iter) = computeCost(X, y, theta);
-    fprintf('J_history(%i)=%.4f theta=%.4f, %.4f\n', iter, J_history(iter), theta);
+  %  fprintf('J_history(%i)=%.4f theta=%.4f, %.4f\n', iter, J_history(iter), theta);
 
 end
 
