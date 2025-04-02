@@ -115,6 +115,11 @@ plt.plot(temp_x, ypoints, color="blue", linewidth=2, label="RANSAC regression mo
 plt.scatter(
     x_pos[inlier_mask], y_pos[inlier_mask], color="orange", marker=".", label="Training data with noise"
 )
+# output the inliers data to csv
+with open('inliers.csv', 'w', newline='') as csvfile:
+    csv_writer = csv.writer(csvfile)
+    for i in range(len(x_pos[inlier_mask])):
+        csv_writer.writerow([x_pos[inlier_mask][i][0], y_pos[inlier_mask][i][0]])
 plt.scatter(
     x_pos[outlier_mask], y_pos[outlier_mask], color="red", s=50, marker="x", label="Training data with outliers"
 )
